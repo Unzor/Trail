@@ -23,7 +23,11 @@ Introducing the most useful character: the closing parentheses!
 The closing parentheses is a character that represents a space, which allows you to write words, letters, and sentences.
 For example, if you want to write a double-digit number like 69 (nice), the parentheses will be useful:
 ```
->>ˇ<>>ˇ<)>>>ˇ<<>
+> > ˇ
+< > > ˇ
+< )
+> > > ˇ
+< < >
 ```
 Binary representation of 69:
 ```
