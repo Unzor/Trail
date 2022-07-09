@@ -6,7 +6,9 @@ First of all, before we get coding, we have to understand the concept of Trail.
 Trail is a language where you code like a trail, but the catch is: to go back, you go down.
 For example, here is the number one in Trail:
 ```
->>ˇ<<<>
+> > ˇ
+< < <
+ˇ > 
 ```
 ## What is the `ˇ` character? 
 It is basically a down arrow, which is ignored by the Trail interpreter but is one of the more useful characters.
