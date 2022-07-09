@@ -72,9 +72,14 @@ Okay, let's start actually writing code.
 ```
 ### amogus (just 69 without parentheses) (nice again)
 ```
->>ˇ<>>ˇ<>>>ˇ<<>
+> > ˇ
+< > > ˇ
+< > > > ˇ
+< < >
 ```
 ### Number One
 ```
->>ˇ<<<>
+> > ˇ
+< < <
+ˇ > 
 ```
