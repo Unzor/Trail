@@ -15,6 +15,7 @@
 <input id="result" placeholder="Result here.." onkeydown="event.preventDefault()">
 <script>
   async function loadExample(name) {
+    var it = 0;
     var file = await fetch('./examples/'+name+'.trl');
     file = await file.text();
     file.replaceAll('\n','').split(' ').forEach(function(x){
