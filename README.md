@@ -80,3 +80,8 @@ Okay, let's start actually writing code.
 < < <
 ˇ > 
 ```
+
+# Okay, cool. But where do I run it?
+There are two ways to run it:
+- [Online Trail interpreter](https://unzor.github.io/Trail/pages/run.html)
+- [Using the API](https://github.com/Unzor/Trail/tree/main/dist)
