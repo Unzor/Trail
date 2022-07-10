@@ -1,0 +1,152 @@
+<style>
+  .row { display: flex; font-size: 1px; text-align: center; color: red }
+.cell { width: 20px; height: 20px; border: 0.5px solid black;}
+</style>
+<h1> Trail interpreter </h1>
+<p> Use left, right and down arrows to move around, and use spacebar to add a space to the code.</p>
+<div id="container"></div>
+<button onclick="run()"> Run </button>
+<br>
+<input id="binary" placeholder="Binary here.." onkeydown="event.preventDefault()">
+<br>
+<br>
+<input id="result" placeholder="Result here.." onkeydown="event.preventDefault()">
+<script>
+  function trail(ca, of){
+    var pElem;
+    var bind = [];
+    return new Promise((resolve, reject) => {
+    let cs = []
+     ca.forEach(function(c, i){
+        var elem = document.getElementById(c.id);
+        var cobj = c;
+        c = c.char
+        setTimeout(function(){
+        of(c)
+        bind.push(c);
+        if (pElem) pElem.style.background = "white";
+        pElem = elem;
+        elem.style.background = "yellow";
+        switch(c){
+            case '>':
+                if (ca[i+1].char !== '<') {
+                   cs.push(1)
+                } else {
+                  elem.style.background = "red";
+                  document.getElementById(ca[i + 1].id).style.background = "red";
+                  document.querySelector('#result').value = "A less-than sign has collided with a greater-than sign! Use the down arrow to avoid collisions between two characters."
+                  reject("failed");
+                }
+                break;
+            case '<': 
+                if (ca[i-1].char !== '>') {
+                    cs.push(0)
+                } else {
+                  reject("failed");
+                }
+                break;
+         case 'ˇ': break;
+         case '\n': break;
+         case ' ': break;
+         case ')': cs.push(' '); break;
+        default: throw new Error('character not allowed'); break;
+         }
+        }, i * 100)
+     });
+      console.log(0)
+        setTimeout(() => {
+          pElem.style.background = "white";
+            resolve(String.fromCharCode(...document.querySelector('#binary').value.split(" ").map(r => parseInt(r, 2))))
+        }, (ca.length * 100))
+    })
+}
+  
+  var i = 0;
+
+container.innerHTML = 
+    `<div class="row">${'<input class="cell" id="X"></input>'.repeat(25)}</div>`
+    .repeat(25)
+    .replace(/X/g,_=> i++);
+  
+let getPos = (e, t) => {
+    if (t == "down") {
+        return document.getElementById(parseInt(e.id)+25)
+    } else if (t == "left") {
+        return document.getElementById(parseInt(e.id)-1)
+    }
+    else if (t == "right") {
+        return document.getElementById(parseInt(e.id)+1)
+    }
+}
+
+document.querySelectorAll('.row *').forEach(x => {
+  x.getPos = (t) => getPos(x, t)
+  x.onkeydown = function(e) {
+        switch(e.key){    
+            case "ArrowDown": 
+            console.log(this)
+                this.value = "ˇ";
+                if (this.getPos("down")) {
+                    this.getPos("down").focus()
+                }
+            break;
+            case "ArrowLeft": 
+                this.value = "<";
+                if (this.getPos("left")) {
+                    this.getPos("left").focus()
+                }
+            break;
+            case "ArrowRight": 
+                this.value = ">";
+                if (this.getPos("right")) {
+                    this.getPos("right").focus()
+                }
+            break;
+            case " ": 
+                this.value = ")";
+                this.getPos("right").focus()
+            break;
+          default: this.value = ""; break;
+        }
+}
+  x.clearL = () => {
+    if (!x.value.includes("ˇ") && !x.value.includes(">") && !x.value.includes("<") && !x.value.includes(")")) { x.value = "" }
+  };
+  setInterval(()=>x.clearL())
+})
+  
+  
+  let getGrid = () => {
+    var inputs = [];
+    var i2 = [];
+document.querySelectorAll('.row').forEach(function(e){
+    var chars = Array.from(e.childNodes).map(x=>x.value==''?null:{char: x.value, id: x.id})
+    var achars = [];
+    chars.forEach(x => x !== null ? achars.push(x) : null);
+    if (achars.length !== 0) {
+        inputs.push(achars);
+    }
+})
+    inputs.forEach(function(e){
+      e.forEach((x) => i2.push(x));
+    })
+    return i2;
+  }
+
+  let run = async (o) => {
+    document.querySelector('#binary').value = ""
+    document.querySelector('#result').value = ""
+    var res = await trail(getGrid(), (b) => {
+    if (b == ">") {
+        document.querySelector('#binary').value += 1
+    }
+    else if (b == "<") {
+        document.querySelector('#binary').value += 0
+    }
+    else if (b == ")") {
+        document.querySelector('#binary').value += " "
+    } 
+});
+    document.querySelector('#result').value = res;
+  }
+</script>
