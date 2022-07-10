@@ -7,11 +7,21 @@
 <div id="container"></div>
 <button onclick="run()"> Run </button>
 <br>
+<button onclick="loadExample('hello_world')"> Hello World example </button>
+<br>
 <input id="binary" placeholder="Binary here.." onkeydown="event.preventDefault()">
 <br>
 <br>
 <input id="result" placeholder="Result here.." onkeydown="event.preventDefault()">
 <script>
+  async function loadExample(name) {
+    var file = await fetch('./examples/'+name+'.trl');
+    file = await file.text();
+    file.replaceAll('\n','').split(' ').forEach(function(x){
+      document.getElementById(it++).value = x;
+    })
+  };
+  
   function trail(ca, of){
     var pElem;
     var bind = [];
