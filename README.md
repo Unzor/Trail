@@ -85,3 +85,6 @@ Okay, let's start actually writing code.
 There are two ways to run it:
 - [Online Trail interpreter](https://unzor.github.io/Trail/pages/run.html)
 - [Using the API](https://github.com/Unzor/Trail/tree/main/dist)
+
+# Esolang Page
+Additional info on [Esolang page](https://esolangs.org/wiki/Trail).
