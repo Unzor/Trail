@@ -1,6 +1,3 @@
-# Trail
-An esolang created to be as small as possible and to be as horrible to use as possible.
-
 # Basics of Trail
 First of all, before we get coding, we have to understand the concept of Trail.
 Trail is a language where you code like a trail, but the catch is: to go back, you go down.
